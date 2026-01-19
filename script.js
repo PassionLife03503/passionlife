@@ -11,25 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Intersection Observer for Fade-in effects
-    const observerOptions = {
-        threshold: 0.1
-    };
+    const fadeObserverOptions = { threshold: 0.1 };
 
-    const observer = new IntersectionObserver((entries) => {
+    const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
+                fadeObserver.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, fadeObserverOptions);
 
     document.querySelectorAll('.fade-in').forEach(el => {
-        // Set initial state via JS ensuring it overrides or complements CSS
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
-        observer.observe(el);
+        fadeObserver.observe(el);
     });
 
     // Simple Cursor Glow Follower
@@ -42,16 +39,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Header Blur on Scroll
+    // Header
     const header = document.querySelector('.glass-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.background = 'rgba(20, 20, 20, 0.9)';
-            header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
-        } else {
-            header.style.background = 'rgba(20, 20, 20, 0.8)';
-            header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
-        }
-    });
+    const hero = document.querySelector('#hero');
+
+    // ✅ efeito de transparência enquanto está no hero (opcional)
+    const updateHeaderOnScroll = () => {
+        if (!header) return;
+        const threshold = 80;
+
+        if (window.scrollY > threshold) header.classList.add('is-transparent');
+        else header.classList.remove('is-transparent');
+    };
+
+    updateHeaderOnScroll();
+    window.addEventListener('scroll', updateHeaderOnScroll);
+
+    // ✅ esconder o header quando sair do hero
+    if (header && hero) {
+        const heroObserver = new IntersectionObserver(
+            ([entry]) => {
+                header.classList.toggle('hide-header', !entry.isIntersecting);
+            },
+            { threshold: 0.15 }
+        );
+
+        heroObserver.observe(hero);
+    }
+
+    // ✅ Mobile Menu Toggle Logic
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+
+            // Optional: Animate icon or change to 'X'
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons(); // Re-render icons
+        });
+
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+    }
 
 });
