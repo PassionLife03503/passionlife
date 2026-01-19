@@ -23,7 +23,7 @@
     <header class="glass-header">
         <nav>
             <a href="#" class="logo">
-                <img src="./logo.png" alt="PassionLife Logo">
+                <img src="assets/logo-main.png" alt="PassionLife Logo">
             </a>
 
             <button class="mobile-menu-toggle" aria-label="Abrir Menu">
@@ -91,7 +91,7 @@
         <section id="benefits" class="benefits-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>Porque <span class="highlight">Revender PassionLife?</span></h2>
+                    <h2>POR QUE <span class="highlight">PASSIONLIFE?</span></h2>
                 </div>
                 <div class="benefits-container">
                     <div class="benefit-item">
@@ -189,19 +189,74 @@
         <!-- CTA Section -->
         <section id="join" class="cta-section">
             <div class="cta-glass-container">
-                <h2>PRONTA PARA O <span class="highlight">FUTURO?</span></h2>
+                <h2>PRONTA PARA O <span class="highlight">SUCESSO?</span></h2>
                 <p>Junte-se a nós e comece sua jornada hoje mesmo.</p>
                 <form class="signup-form">
                     <div class="input-group">
-                        <input type="text" placeholder="Seu Nome" required>
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu Nome Completo" required>
                     </div>
+
                     <div class="input-group">
-                        <input type="email" placeholder="Seu E-mail" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Seu E-mail" required>
                     </div>
+
                     <div class="input-group">
-                        <input type="tel" placeholder="Seu WhatsApp" required>
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(DDD) 99999-9999" required>
                     </div>
-                    <button type="submit" class="submit-btn">QUERO SER REVENDEDORA</button>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="cep">CEP <small>(somente números)</small></label>
+                            <input type="text" id="cep" name="cep" placeholder="00000000" maxlength="8" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="cnpj">CNPJ <small>(somente números)</small></label>
+                            <input type="text" id="cnpj" name="cnpj" placeholder="00000000000000" maxlength="14"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="tipo_cadastro">Tipo de cadastro</label>
+                        <select id="tipo_cadastro" name="tipo_cadastro" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="ja_revendo">Já revendo</option>
+                            <option value="comecar_revender">Pretendo começar a revender</option>
+                            <option value="lojista">Sou lojista e quero comprar</option>
+                            <option value="varejo">Quero comprar para uso próprio</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group checkbox-group">
+                        <label>Esse número é Whatsapp e temos sua autorização para contata-la?</label>
+                        <div class="radio-options">
+                            <label class="radio-label">
+                                <input type="radio" name="whatsapp_autorizacao" value="sim" required> Sim
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="whatsapp_autorizacao" value="nao"> Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group checkbox-group">
+                        <label>Nós não trabalhamos com consignados e temos um valor de pedido mínimo para
+                            atacado.</label>
+                        <div class="radio-options">
+                            <label class="radio-label">
+                                <input type="radio" name="concordo_atacado" value="ciente" required> Estou ciente e de
+                                acordo
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="concordo_atacado" value="sem_interesse"> Não tenho interesse
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" style="margin-top: 1rem;">QUERO SER REVENDEDORA</button>
                 </form>
             </div>
         </section>
