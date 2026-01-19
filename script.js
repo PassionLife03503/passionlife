@@ -120,4 +120,58 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000); // Syncs with 2s alternate animation * 2
     }
 
+    // ✅ Form Validation & Masks
+    const cepInput = document.getElementById('cep');
+    const cnpjInput = document.getElementById('cnpj');
+    const phoneInput = document.getElementById('telefone');
+
+    // Restrict CEP and CNPJ to numbers only
+    const restrictToNumbers = (e) => {
+        // Remove non-numeric characters
+        e.target.value = e.target.value.replace(/\D/g, '');
+    };
+
+    if (cepInput) {
+        cepInput.addEventListener('input', restrictToNumbers);
+    }
+
+    if (cnpjInput) {
+        cnpjInput.addEventListener('input', restrictToNumbers);
+    }
+
+    // Simple Phone Mask (DDD) 99999-9999
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+
+            if (value.length > 2) {
+                value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+            }
+            if (value.length > 9) { // (11) 91234
+                value = `${value.substring(0, 10)}-${value.substring(10)}`;
+            }
+
+            e.target.value = value;
+        });
+    }
+
+
+    // ✅ Product Line Scroll Arrows Logic
+    document.querySelectorAll('.line-card').forEach(card => {
+        const roller = card.querySelector('.image-roller');
+        const leftBtn = card.querySelector('.scroll-left');
+        const rightBtn = card.querySelector('.scroll-right');
+
+        if (roller && leftBtn && rightBtn) {
+            leftBtn.addEventListener('click', () => {
+                roller.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+
+            rightBtn.addEventListener('click', () => {
+                roller.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+        }
+    });
+
 });
