@@ -96,4 +96,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ✅ Dynamic Word Cycling (Purpose -> Mission -> Values)
+    const typingElement = document.querySelector('.highlight-text-purpose');
+    if (typingElement) {
+        const words = ["PROPÓSITO", "MISSÃO", "VALORES"];
+        let wordIndex = 0;
+
+        // The CSS animation is 2s alternate. 
+        // 0->100% (2s), 100%->0% (2s). Total cycle 4s.
+        // We switch text when fully erased (every 4s).
+
+        setInterval(() => {
+            wordIndex = (wordIndex + 1) % words.length;
+            const newWord = words[wordIndex];
+
+            // Update Text
+            typingElement.textContent = newWord;
+            typingElement.setAttribute('data-text', newWord);
+
+            // Optional: Adjust steps based on length to be perfect
+            // But steps(10) in CSS is usually 'good enough' for 6-9 chars.
+
+        }, 4000); // Syncs with 2s alternate animation * 2
+    }
+
 });
