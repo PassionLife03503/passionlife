@@ -285,6 +285,29 @@ h4 {
     }
 }
 
+/* Typing Effect for Purpose/Mission/Values */
+.highlight-text-purpose {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text-color);
+    position: relative;
+    display: inline-block;
+}
+
+.highlight-text-purpose::before {
+    content: attr(data-text);
+    /* Dynamic text from HTML */
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--secondary-neon);
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--secondary-neon);
+    /* Faster speed (2s) and generic steps */
+    animation: typing 2s steps(10) infinite alternate;
+}
+
 .hero-subtitle {
     font-size: 1.2rem;
     margin-bottom: 3rem;
@@ -441,6 +464,18 @@ h4 {
 .benefits-section {
     padding: 8rem 0;
     position: relative;
+    background-color: #f2f7e7;
+    /* Light background as requested */
+}
+
+/* Ensure title is visible on light bg */
+.benefits-section .section-header h2 {
+    color: #141414;
+}
+
+.benefits-section .section-header h2 .highlight {
+    color: #141414;
+    text-shadow: none;
 }
 
 .benefits-container {
@@ -455,28 +490,46 @@ h4 {
     align-items: center;
     text-align: center;
     gap: 1rem;
-    padding: 2rem;
-    border-bottom: 1px solid var(--glass-border);
-    transition: background 0.3s;
+    padding: 3rem;
+    /* Increased padding for container feel */
+
+    /* Blurred Gray Container Style */
+    background: rgba(0, 0, 0, 0.05);
+    /* Grayish transparent */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    transition: all 0.3s ease;
 }
 
 .benefit-item:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
 }
 
 .benefit-number {
     font-family: var(--font-heading);
     font-size: 3rem;
     color: var(--primary-neon);
+    /* Keep pink accent */
 }
 
 .benefit-text {
-    color: var(--text-color);
+    color: #141414;
+    /* Dark text for readability */
 }
 
 .benefit-text h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    color: #141414;
+}
+
+.benefit-text p {
+    color: #444;
+    /* Slightly softer dark gray for body text */
 }
 
 /* Products Section */
