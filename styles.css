@@ -702,6 +702,12 @@ h4 {
     /* Aumentar altura para fotos verticais */
 }
 
+/* Modificação específica para o card PassionBeach para acomodar fotos verticais */
+.passion-beach-card .image-roller {
+    height: 400px;
+    /* Aumentar altura para fotos verticais */
+}
+
 .custom-scrollbar::-webkit-scrollbar {
     height: 6px;
 }
@@ -723,7 +729,10 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(circle at center, #1e050b 0%, var(--bg-color) 80%);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/form-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* CTA Glass Container - Apple Style "Bubble" */
@@ -746,7 +755,7 @@ h4 {
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
 
     text-align: center;
-    max-width: 550px;
+    max-width: 800px;
     /* Slightly narrower for mobile elegance */
     width: 100%;
     margin: 0 auto;
@@ -817,6 +826,14 @@ h4 {
 .input-row {
     display: flex;
     gap: 1rem;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .input-row {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
 }
 
 .input-row .input-group {
@@ -1198,7 +1215,182 @@ footer {
 }
 
 .passion-pro-card .cta-button-small:hover {
-    background: #ffffff;
-    color: #141414 !important;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Custom Radio Buttons with X inside Circle */
+.radio-options {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #444;
+    font-weight: 500;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.radio-label:hover {
+    color: #222;
+}
+
+/* Custom Radio Circle */
+.radio-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.4em;
+    height: 1.4em;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
+
+.radio-label input[type="radio"]:hover {
+    border-color: rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* X mark when checked */
+.radio-label input[type="radio"]:checked {
+    background: var(--primary-neon);
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 8px rgb(119, 3, 29, 0.4);
+}
+
+.radio-label input[type="radio"]:checked::after {
+    content: "✕";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* --- Success Pop-up (Apple Style) --- */
+.success-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.4s ease;
+    padding: 20px;
+}
+
+.success-popup.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+
+    /* ✅ aumenta tamanho */
+    width: min(900px, 92vw);
+    max-width: 900px;
+    padding: 3.5rem;
+
+    /* ✅ controla altura sem estourar tela */
+    max-height: 85vh;
+    overflow: auto;
+
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+.success-popup.show .popup-glass {
+    transform: translateY(0);
+}
+
+.close-popup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #f7f2e7;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.close-popup:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.popup-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.gestora-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(247, 242, 231, 0.3);
+    flex-shrink: 0;
+}
+
+.gestora-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popup-text h3 {
+    font-size: 1.8rem;
+    color: #f7f2e7;
+    margin-bottom: 0.5rem;
+}
+
+.popup-text p {
+    color: #f7f2e7;
+    line-height: 1.5;
+    font-size: 1rem;
+    margin: 0;
+}
+
+@media (max-width: 480px) {
+    .popup-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .popup-glass {
+        padding: 2rem;
+    }
 }
