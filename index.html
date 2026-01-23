@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="PassionLife: O Futuro da Intimidade. Seja uma revendedora e lucre com a marca de lingerie mais inovadora do mercado.">
-    <title>PassionLife | O Futuro da Intimidade</title>
+    <title>Revenda PassionLife</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -23,7 +23,7 @@
     <header class="glass-header">
         <nav>
             <a href="#" class="logo">
-                <img src="assets/logo-main.png" alt="PassionLife Logo">
+                <img src="assets/logo-new.png" alt="PassionLife Logo">
             </a>
 
             <button class="mobile-menu-toggle" aria-label="Abrir Menu">
@@ -61,8 +61,8 @@
         <section id="about" class="about-section">
             <div class="container">
                 <div class="section-header">
-                    <h2><span class="dynamic-prefix">NOSSO<span class="highlight-text-purpose"
-                                data-text="PROPÓSITO">PROPÓSITO</span></h2>
+                    <h2><span class="dynamic-prefix"><span class="highlight-text-purpose"
+                                data-text="Nosso propósito">Nosso propósito</span></h2>
                 </div>
                 <div class="about-grid">
                     <div class="about-card glass-card fade-in">
@@ -160,9 +160,11 @@
                             <button class="scroll-arrow scroll-left" aria-label="Scroll Left"><i
                                     data-lucide="chevron-left"></i></button>
                             <div class="image-roller custom-scrollbar">
-                                <div class="roller-item"></div>
-                                <div class="roller-item"></div>
-                                <div class="roller-item"></div>
+                                <img src="assets/img/passion_beach/img1.jpg" alt="PassionBeach 1" class="vertical-img">
+                                <img src="assets/img/passion_beach/img2.jpg" alt="PassionBeach 2" class="vertical-img">
+                                <img src="assets/img/passion_beach/img3.jpg" alt="PassionBeach 3" class="vertical-img">
+                                <img src="assets/img/passion_beach/img4.jpg" alt="PassionBeach 4" class="vertical-img">
+                                <img src="assets/img/passion_beach/img5.jpg" alt="PassionBeach 5" class="vertical-img">
                             </div>
                             <button class="scroll-arrow scroll-right" aria-label="Scroll Right"><i
                                     data-lucide="chevron-right"></i></button>
@@ -230,21 +232,37 @@
                 <h2>PRONTA PARA O <span class="highlight">SUCESSO?</span></h2>
                 <p>Junte-se a nós e comece sua jornada hoje mesmo.</p>
                 <form class="signup-form">
-                    <div class="input-group">
-                        <label for="nome">Nome Completo</label>
-                        <input type="text" id="nome" name="nome" placeholder="Seu Nome Completo" required>
+                    <!-- Row 1: Nome + Email -->
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" placeholder="Seu Nome Completo" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Seu E-mail" required>
+                        </div>
                     </div>
 
-                    <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Seu E-mail" required>
+                    <!-- Row 2: Telefone + Tipo -->
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(DDD) 99999-9999" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="tipo_cadastro">Tipo de cadastro</label>
+                            <select id="tipo_cadastro" name="tipo_cadastro" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="ja_revendo">Já revendo</option>
+                                <option value="comecar_revender">Pretendo começar a revender</option>
+                                <option value="lojista">Sou lojista e quero comprar</option>
+                                <option value="varejo">Quero comprar para uso próprio</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="input-group">
-                        <label for="telefone">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="(DDD) 99999-9999" required>
-                    </div>
-
+                    <!-- Row 3: CEP + CNPJ -->
                     <div class="input-row">
                         <div class="input-group">
                             <label for="cep">CEP <small>(somente números)</small></label>
@@ -257,45 +275,38 @@
                         </div>
                     </div>
 
-                    <div class="input-group">
-                        <label for="tipo_cadastro">Tipo de cadastro</label>
-                        <select id="tipo_cadastro" name="tipo_cadastro" required>
-                            <option value="" disabled selected>Selecione uma opção</option>
-                            <option value="ja_revendo">Já revendo</option>
-                            <option value="comecar_revender">Pretendo começar a revender</option>
-                            <option value="lojista">Sou lojista e quero comprar</option>
-                            <option value="varejo">Quero comprar para uso próprio</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group checkbox-group">
-                        <label>Esse número é Whatsapp e temos sua autorização para contata-la?</label>
-                        <div class="radio-options">
-                            <label class="radio-label">
-                                <input type="radio" name="whatsapp_autorizacao" value="sim" required> Sim
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="whatsapp_autorizacao" value="nao"> Não
-                            </label>
+                    <!-- Row 4: Consents (Side by Side) -->
+                    <div class="input-row consents-row">
+                        <div class="input-group checkbox-group">
+                            <label>Autoriza contato via Whatsapp?</label>
+                            <div class="radio-options">
+                                <label class="radio-label">
+                                    <input type="radio" name="whatsapp_autorizacao" value="sim" required>
+                                    <span>Sim</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="whatsapp_autorizacao" value="nao"> <span>Não</span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="input-group checkbox-group">
-                        <label>Nós não trabalhamos com consignados e temos um valor de pedido mínimo para
-                            atacado.</label>
-                        <div class="radio-options">
-                            <label class="radio-label">
-                                <input type="radio" name="concordo_atacado" value="ciente" required> Estou ciente e de
-                                acordo
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="concordo_atacado" value="sem_interesse"> Não tenho interesse
-                            </label>
+                        <div class="input-group checkbox-group">
+                            <label>Ciente sobre atacado/mínimo?</label>
+                            <div class="radio-options">
+                                <label class="radio-label">
+                                    <input type="radio" name="concordo_atacado" value="ciente" required>
+                                    <span>Sim</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="concordo_atacado" value="sem_interesse"> <span>Não</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
 
                     <button type="submit" class="submit-btn" style="margin-top: 1rem;">QUERO SER REVENDEDORA</button>
                 </form>
+                <div class="form-message" style="margin-top: 1rem; display: none;"></div>
             </div>
         </section>
     </main>
@@ -311,6 +322,25 @@
             </div>
         </div>
     </footer>
+
+    <!-- Success Pop-up (Apple Style) -->
+    <div id="success-popup" class="success-popup">
+        <div class="popup-glass">
+            <button class="close-popup" aria-label="Fechar">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="popup-content">
+                <div class="gestora-image">
+                    <img src="assets/gestora.png" alt="Gestora PassionLife">
+                </div>
+                <div class="popup-text">
+                    <h3>Parabéns!</h3>
+                    <p>Seu cadastro foi feito com sucesso. Em <strong>4 minutos</strong>, uma de nossas gestoras de
+                        vendas entrará em contato com você!</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
