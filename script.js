@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ✅ Dynamic Word Cycling (Purpose -> Mission -> Values)
     const typingElement = document.querySelector('.highlight-text-purpose');
     if (typingElement) {
-        const words = ["PROPÓSITO", "MISSÃO", "VALORES"];
+        const words = ["Nosso propósito", "Nossa missão", "Nossos valores"];
         let wordIndex = 0;
 
         // The CSS animation is 2s alternate. 
@@ -157,21 +157,172 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // ✅ Product Line Scroll Arrows Logic
+    // ✅ Infinite Loop Carousel Logic (Arrows + Drag)
     document.querySelectorAll('.line-card').forEach(card => {
         const roller = card.querySelector('.image-roller');
         const leftBtn = card.querySelector('.scroll-left');
         const rightBtn = card.querySelector('.scroll-right');
 
-        if (roller && leftBtn && rightBtn) {
+        if (!roller) return;
+
+        const items = [...roller.children];
+        if (items.length === 0) return;
+
+        // Clone items for infinite feel
+        items.forEach(item => {
+            const cloneBefore = item.cloneNode(true);
+            const cloneAfter = item.cloneNode(true);
+            roller.insertBefore(cloneBefore, roller.firstChild);
+            roller.appendChild(cloneAfter);
+        });
+
+        // Calculate single set width
+        const getItemWidth = () => {
+            const firstItem = roller.querySelector('.vertical-img, .roller-item');
+            if (!firstItem) return 0;
+            return firstItem.offsetWidth + parseInt(getComputedStyle(roller).gap || 0);
+        };
+
+        let itemWidth = getItemWidth();
+        let totalOriginalWidth = itemWidth * items.length;
+
+        // Set initial scroll position to the middle set
+        // Use a small timeout to ensure layout is ready
+        setTimeout(() => {
+            itemWidth = getItemWidth();
+            totalOriginalWidth = itemWidth * items.length;
+            roller.scrollLeft = totalOriginalWidth;
+        }, 100);
+
+        // Infinite scroll jump logic
+        roller.addEventListener('scroll', () => {
+            if (itemWidth === 0) {
+                itemWidth = getItemWidth();
+                totalOriginalWidth = itemWidth * items.length;
+            }
+
+            if (roller.scrollLeft <= 0) {
+                // Jump to the end of the middle set
+                roller.scrollLeft = totalOriginalWidth;
+            } else if (roller.scrollLeft >= totalOriginalWidth * 2) {
+                // Jump back to the start of the middle set
+                roller.scrollLeft = totalOriginalWidth;
+            }
+        });
+
+        // Arrows functionality
+        if (leftBtn && rightBtn) {
             leftBtn.addEventListener('click', () => {
-                roller.scrollBy({ left: -300, behavior: 'smooth' });
+                roller.scrollBy({ left: -itemWidth, behavior: 'smooth' });
             });
 
             rightBtn.addEventListener('click', () => {
-                roller.scrollBy({ left: 300, behavior: 'smooth' });
+                roller.scrollBy({ left: itemWidth, behavior: 'smooth' });
             });
         }
+
+        // Click and Drag functionality
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        roller.addEventListener('mousedown', (e) => {
+            isDown = true;
+            roller.classList.add('active');
+            startX = e.pageX - roller.offsetLeft;
+            scrollLeft = roller.scrollLeft;
+            roller.style.cursor = 'grabbing';
+            roller.style.scrollBehavior = 'auto'; // Disable smooth scroll while dragging
+        });
+
+        const stopDragging = () => {
+            isDown = false;
+            roller.classList.remove('active');
+            roller.style.cursor = 'grab';
+            roller.style.scrollBehavior = 'smooth';
+        };
+
+        roller.addEventListener('mouseleave', stopDragging);
+        roller.addEventListener('mouseup', stopDragging);
+
+        roller.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - roller.offsetLeft;
+            const walk = (x - startX) * 2;
+            roller.scrollLeft = scrollLeft - walk;
+        });
+
+        // Set initial cursor
+        roller.style.cursor = 'grab';
     });
+
+    // ✅ Google Sheets Form Integration + Success Pop-up
+    const signupForm = document.querySelector('.signup-form');
+    const formMessage = document.querySelector('.form-message'); // Inline message for errors
+    const submitBtn = signupForm ? signupForm.querySelector('.submit-btn') : null;
+    const successPopup = document.getElementById('success-popup');
+    const closePopupBtn = document.querySelector('.close-popup');
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQd2Rshz22eMn_C0qWVnpU1BXFpB61CS-pvvoyDheCvI5t46WkpwBalw1s3c9UnZwf/exec';
+
+    if (signupForm && submitBtn && successPopup) {
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Set loading state
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'ENVIANDO...';
+            submitBtn.disabled = true;
+            if (formMessage) formMessage.style.display = 'none';
+
+            const formData = new FormData(signupForm);
+            const params = new URLSearchParams();
+            formData.forEach((value, key) => {
+                params.append(key, value);
+            });
+
+            try {
+                // Use URLSearchParams for better compatibility with GAS
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    cache: 'no-cache',
+                    body: params.toString(),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+
+                // Show Apple-style Pop-up
+                successPopup.classList.add('show');
+                signupForm.reset();
+
+            } catch (error) {
+                console.error('Erro ao enviar formulário:', error);
+                if (formMessage) {
+                    formMessage.textContent = '❌ Ocorreu um erro ao enviar. Por favor, tente novamente mais tarde.';
+                    formMessage.style.color = '#77031d';
+                    formMessage.style.display = 'block';
+                }
+            } finally {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Close Pop-up Logic
+        if (closePopupBtn) {
+            closePopupBtn.addEventListener('click', () => {
+                successPopup.classList.remove('show');
+            });
+        }
+
+        // Close on click outside the glass
+        successPopup.addEventListener('click', (e) => {
+            if (e.target === successPopup) {
+                successPopup.classList.remove('show');
+            }
+        });
+    }
 
 });
