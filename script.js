@@ -102,14 +102,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const words = ["Nosso propósito", "Nossa missão", "Nossos valores"];
         let wordIndex = 0;
 
+        // The CSS animation is 2s alternate. 
+        // 0->100% (2s), 100%->0% (2s). Total cycle 4s.
+        // We switch text when fully erased (every 4s).
+
         setInterval(() => {
             wordIndex = (wordIndex + 1) % words.length;
             const newWord = words[wordIndex];
 
+            // Update Text
             typingElement.textContent = newWord;
             typingElement.setAttribute('data-text', newWord);
 
-        }, 4000);
+            // Optional: Adjust steps based on length to be perfect
+            // But steps(10) in CSS is usually 'good enough' for 6-9 chars.
+
+        }, 4000); // Syncs with 2s alternate animation * 2
     }
 
     // ✅ Form Validation & Masks
@@ -117,7 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cnpjInput = document.getElementById('cnpj');
     const phoneInput = document.getElementById('telefone');
 
+    // Restrict CEP and CNPJ to numbers only
     const restrictToNumbers = (e) => {
+        // Remove non-numeric characters
         e.target.value = e.target.value.replace(/\D/g, '');
     };
 
@@ -138,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (value.length > 2) {
                 value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
             }
-            if (value.length > 9) {
+            if (value.length > 9) { // (11) 91234
                 value = `${value.substring(0, 10)}-${value.substring(10)}`;
             }
 
@@ -146,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ✅ Infinite Loop Carousel Logic (Arrows + Drag)
+
+    // ✅ Infinite Loop Carousel Logic (Arrows + Drag + Touch)
     const initCarousel = () => {
         document.querySelectorAll('.line-card').forEach(card => {
             const roller = card.querySelector('.image-roller');
@@ -155,60 +166,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!roller) return;
 
-            const items = [...roller.children];
-            if (items.length === 0) return;
+            // Clear existing clones if re-initializing
+            const originalItems = [...roller.querySelectorAll('.vertical-img, .roller-item:not(.clone)')];
+            if (originalItems.length === 0) return;
 
-            // Clone items for infinite feel
-            items.forEach(item => {
+            // Mark originals
+            originalItems.forEach(item => item.classList.remove('clone'));
+
+            // Remove old clones
+            roller.querySelectorAll('.clone').forEach(el => el.remove());
+
+            // Clone sets to ensure infinite feel
+            // [Set1 (Clone)] [Set2 (Original)] [Set3 (Clone)]
+            originalItems.forEach(item => {
                 const cloneBefore = item.cloneNode(true);
                 const cloneAfter = item.cloneNode(true);
+                cloneBefore.classList.add('clone');
+                cloneAfter.classList.add('clone');
                 roller.insertBefore(cloneBefore, roller.firstChild);
                 roller.appendChild(cloneAfter);
             });
 
-            const getItemWidth = () => {
-                const firstItem = roller.querySelector('.vertical-img, .roller-item');
-                if (!firstItem) return 0;
-                return firstItem.offsetWidth + parseInt(getComputedStyle(roller).gap || 0);
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            let isMoving = false;
+
+            const getSetWidth = () => {
+                const gap = parseInt(window.getComputedStyle(roller).gap) || 0;
+                let totalWidth = 0;
+                originalItems.forEach(item => {
+                    totalWidth += item.offsetWidth + gap;
+                });
+                return totalWidth;
             };
 
-            let itemWidth = 0;
-            let totalOriginalWidth = 0;
+            let setWidth = getSetWidth();
 
+            // Initial position (middle set)
             const resetPosition = () => {
-                itemWidth = getItemWidth();
-                totalOriginalWidth = itemWidth * items.length;
-                roller.scrollLeft = totalOriginalWidth;
+                setWidth = getSetWidth();
+                roller.scrollTo({ left: setWidth, behavior: 'instant' });
             };
 
-            setTimeout(resetPosition, 100);
+            // Wait for images to load to get correct widths
+            if (document.readyState === 'complete') {
+                resetPosition();
+            } else {
+                window.addEventListener('load', resetPosition);
+            }
 
+            // Infinite Loop Jump Logic
             roller.addEventListener('scroll', () => {
-                if (itemWidth === 0) resetPosition();
+                if (isMoving) return;
 
-                if (roller.scrollLeft <= 0) {
-                    roller.scrollLeft = totalOriginalWidth;
-                } else if (roller.scrollLeft >= totalOriginalWidth * 2) {
-                    roller.scrollLeft = totalOriginalWidth;
+                const currentScroll = roller.scrollLeft;
+                if (currentScroll <= 0) {
+                    roller.scrollTo({ left: setWidth, behavior: 'instant' });
+                } else if (currentScroll >= setWidth * 2) {
+                    roller.scrollTo({ left: setWidth, behavior: 'instant' });
                 }
             });
 
-            if (leftBtn && rightBtn) {
+            // Arrow Navigation
+            const scrollAmount = 300;
+            if (leftBtn) {
                 leftBtn.addEventListener('click', () => {
-                    roller.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+                    roller.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
                 });
-
+            }
+            if (rightBtn) {
                 rightBtn.addEventListener('click', () => {
-                    roller.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                    roller.scrollBy({ left: scrollAmount, behavior: 'smooth' });
                 });
             }
 
             // Drag / Touch Events
-            let isDown = false;
-            let isMoving = false;
-            let startX;
-            let scrollLeft;
-
             const startDragging = (e) => {
                 isDown = true;
                 isMoving = true;
@@ -222,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!isDown) return;
                 e.preventDefault();
                 const x = (e.pageX || e.touches[0].pageX) - roller.offsetLeft;
-                const walk = (x - startX) * 1.5;
+                const walk = (x - startX) * 1.5; // Drag speed
                 roller.scrollLeft = scrollLeft - walk;
             };
 
@@ -243,6 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
             roller.addEventListener('touchmove', moveDragging, { passive: false });
             roller.addEventListener('touchend', stopDragging);
 
+            // Handle Resize
             window.addEventListener('resize', resetPosition);
         });
     };
@@ -251,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ✅ Google Sheets Form Integration + Success Pop-up
     const signupForm = document.querySelector('.signup-form');
-    const formMessage = document.querySelector('.form-message');
+    const formMessage = document.querySelector('.form-message'); // Inline message for errors
     const submitBtn = signupForm ? signupForm.querySelector('.submit-btn') : null;
     const successPopup = document.getElementById('success-popup');
     const closePopupBtn = document.querySelector('.close-popup');
@@ -261,8 +295,9 @@ document.addEventListener('DOMContentLoaded', () => {
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Set loading state
             const originalBtnText = submitBtn.textContent;
-            submitBtn.textContent = 'ENVIANDO.';
+            submitBtn.textContent = 'ENVIANDO...';
             submitBtn.disabled = true;
             if (formMessage) formMessage.style.display = 'none';
 
@@ -273,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             try {
+                // Use URLSearchParams for better compatibility with GAS
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -283,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
+                // Show Apple-style Pop-up
                 successPopup.classList.add('show');
                 signupForm.reset();
 
@@ -299,12 +336,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Close Pop-up Logic
         if (closePopupBtn) {
             closePopupBtn.addEventListener('click', () => {
                 successPopup.classList.remove('show');
             });
         }
 
+        // Close on click outside the glass
         successPopup.addEventListener('click', (e) => {
             if (e.target === successPopup) {
                 successPopup.classList.remove('show');
