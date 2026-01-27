@@ -836,8 +836,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/img/passion_intima
-/form-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/form-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1502,4 +1501,5 @@ footer {
         padding: 2rem;
     }
 }
+
 
