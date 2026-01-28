@@ -964,7 +964,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/form-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/img/backgrounds/form-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1241,7 +1241,7 @@ h4 {
 /* Testimonials Section */
 .testimonials {
     padding: 8rem 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/testimonials-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/img/backgrounds/testimonials-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1818,4 +1818,5 @@ footer {
         padding: 2rem;
     }
 }
+
 
