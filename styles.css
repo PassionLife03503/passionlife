@@ -244,7 +244,7 @@ h4 {
     margin: 0;
     padding: 18rem 2rem 5rem 2rem;
     /* Significant top padding for floating header clearance */
-    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)),url('assets/img/passion_intima/hero-bg.png');
+    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)),url('assets/img/backgrounds/hero-bg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1818,3 +1818,4 @@ footer {
         padding: 2rem;
     }
 }
+
