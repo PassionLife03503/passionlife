@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ✅ Infinite Loop Carousel Logic (Arrows + Drag + Touch)
     const initCarousel = () => {
-        document.querySelectorAll('.line-card').forEach(card => {
+        document.querySelectorAll('.line-card, .pro-roller-wrapper').forEach(card => {
             const roller = card.querySelector('.image-roller');
             const leftBtn = card.querySelector('.scroll-left');
             const rightBtn = card.querySelector('.scroll-right');
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!roller) return;
 
             // Clear existing clones if re-initializing
-            const originalItems = [...roller.querySelectorAll('.vertical-img, .roller-item:not(.clone)')];
+            const originalItems = [...roller.querySelectorAll('.vertical-img, .horizontal-img, .roller-item:not(.clone)')];
             if (originalItems.length === 0) return;
 
             // Mark originals
