@@ -10,8 +10,8 @@
     --glass-bg: rgba(20, 20, 20, 0.6);
     --glass-border: rgba(247, 242, 231, 0.08);
     /* Using text color for subtle border */
-    --font-heading: 'Syncopate', sans-serif;
-    --font-body: 'Outfit', sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Poppins', sans-serif;
 }
 
 * {
@@ -39,7 +39,9 @@ body {
 body {
     color: var(--text-color);
     font-family: var(--font-body);
+    font-weight: 300;
     line-height: 1.6;
+    letter-spacing: 0.3px;
 }
 
 /* Typography & Utilities */
@@ -50,6 +52,7 @@ h4 {
     font-family: var(--font-heading);
     text-transform: uppercase;
     font-weight: 700;
+    letter-spacing: 2px;
 }
 
 .highlight {
@@ -183,7 +186,8 @@ h4 {
     /* ✅ agora aparece */
     text-decoration: none;
     font-size: 0.92rem;
-    letter-spacing: 0.6px;
+    font-weight: 400;
+    letter-spacing: 1px;
     transition: opacity .2s, transform .2s;
 }
 
@@ -204,8 +208,8 @@ h4 {
             #ff005f);
 
     color: #ffffff !important;
-    font-weight: 600;
-    letter-spacing: 0.6px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
 
     border: none;
 
@@ -244,7 +248,7 @@ h4 {
     margin: 0;
     padding: 18rem 2rem 5rem 2rem;
     /* Significant top padding for floating header clearance */
-    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)),url('assets/img/backgrounds/hero-bg.png');
+    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)), url('assets/hero-bg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -383,11 +387,11 @@ h4 {
     /* Slightly deeper gradient */
     color: white;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 50px;
     font-size: 1.1rem;
     transition: transform 0.3s, box-shadow 0.3s;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     box-shadow: 0 4px 15px rgba(255, 15, 123, 0.3);
 }
 
@@ -917,14 +921,11 @@ h4 {
     aspect-ratio: 2 / 3;
 }
 
-/* Modificação específica para o card PassionIntima para acomodar fotos verticais e remover largura fixa que pode cortar */
-.passion-intima-card .image-roller {
-    height: 400px;
-    /* Aumentar altura para fotos verticais */
-}
-
-/* Modificação específica para o card PassionBeach para acomodar fotos verticais */
-.passion-beach-card .image-roller {
+/* Modificações específicas para os cards com fotos verticais reais */
+.passion-intima-card .image-roller,
+.passion-beach-card .image-roller,
+.passion-move-card .image-roller,
+.passion-home-card .image-roller {
     height: 400px;
     /* Aumentar altura para fotos verticais */
 }
@@ -932,7 +933,9 @@ h4 {
 @media (max-width: 768px) {
 
     .passion-intima-card .image-roller,
-    .passion-beach-card .image-roller {
+    .passion-beach-card .image-roller,
+    .passion-move-card .image-roller,
+    .passion-home-card .image-roller {
         height: 300px;
         /* Altura mais equilibrada no mobile */
     }
@@ -964,7 +967,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/img/backgrounds/form-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/form-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -998,52 +1001,57 @@ h4 {
 }
 
 @media (max-width: 768px) {
+    .cta-section {
+        padding: 3.5rem 1rem;
+        /* Much smaller section padding */
+    }
+
     .cta-glass-container {
-        padding: 2rem 1.2rem;
-        /* Mais compacto no mobile */
+        padding: 1.5rem 1.2rem;
         border-radius: 25px;
     }
 
     .cta-glass-container h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.2rem;
     }
 
     .cta-glass-container p {
-        margin-bottom: 1.5rem;
-        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+        font-size: 0.9rem;
     }
 
     .signup-form {
-        gap: 0.8rem;
-        /* Espaçamento reduzido */
+        gap: 0.6rem;
+        /* Tighter vertical gap */
     }
 
     .input-group label {
-        font-size: 0.75rem;
-        margin-left: 0.5rem;
+        font-size: 0.7rem;
+        margin-left: 0.4rem;
+        margin-bottom: 0.1rem;
     }
 
     .input-group input,
     .input-group select {
-        padding: 0.8rem;
-        /* Altura reduzida */
-        font-size: 0.9rem;
+        padding: 0.75rem;
+        font-size: 0.85rem;
         border-radius: 12px;
     }
 
     .radio-options {
-        gap: 0.8rem;
+        gap: 0.5rem;
     }
 
     .radio-label {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.8rem;
     }
 
     .submit-btn {
         padding: 0.8rem;
         font-size: 0.9rem;
-        margin-top: 0.5rem;
+        margin-top: 0.4rem;
     }
 }
 
@@ -1116,8 +1124,12 @@ h4 {
 @media (max-width: 768px) {
     .input-row {
         flex-direction: column;
-        gap: 1.2rem;
+        gap: 0.6rem;
+        /* Reduced gap from 1.2rem */
     }
+
+    /* Small hack to keep CEP/CNPJ or Phone/Type potentially side-by-side if they were short, 
+       but keeping column for now as per usual mobile UX, just making it WAY more compact. */
 }
 
 .input-row .input-group {
@@ -1241,7 +1253,7 @@ h4 {
 /* Testimonials Section */
 .testimonials {
     padding: 8rem 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/img/backgrounds/testimonials-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/testimonials-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1406,11 +1418,17 @@ footer {
 
 @media (max-width: 480px) {
     .testimonials-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
     }
 
     .testimonials .section-title {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .testimonial-card {
+        border-radius: 12px;
     }
 }
 
@@ -1819,4 +1837,120 @@ footer {
     }
 }
 
+/* FAQ Section */
+.faq-section {
+    padding: 8rem 0;
+    background-color: #f7f2e7;
+    position: relative;
+}
 
+/* FAQ Section Header */
+.faq-section .section-header h2 {
+    color: #141414;
+}
+
+.faq-section .section-header h2 .highlight {
+    color: var(--primary-neon);
+    text-shadow: none;
+}
+
+.faq-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 0 1.5rem;
+}
+
+.faq-item {
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    padding: 1.8rem 2.5rem;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 32px;
+    /* Apple-style rounded bubble */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.faq-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.faq-question h3 {
+    font-size: 1.15rem;
+    margin: 0;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.faq-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--primary-neon);
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    flex-shrink: 0;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1), margin-top 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+}
+
+.faq-answer p {
+    color: #4a4a4a;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 400;
+}
+
+.faq-item.active {
+    background: #ffffff;
+    border-color: rgba(119, 3, 29, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 400px;
+    margin-top: 1.5rem;
+    opacity: 1;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+    color: var(--primary-neon);
+}
+
+@media (max-width: 768px) {
+    .faq-section {
+        padding: 5rem 0;
+    }
+
+    .faq-item {
+        padding: 1.2rem 1.5rem;
+    }
+
+    .faq-question h3 {
+        font-size: 1rem;
+    }
+}
