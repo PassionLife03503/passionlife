@@ -248,7 +248,7 @@ h4 {
     margin: 0;
     padding: 18rem 2rem 5rem 2rem;
     /* Significant top padding for floating header clearance */
-    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)), url('assets/img/backgrounds/hero-bg.png');
+    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)), url('assets/hero-bg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -797,19 +797,39 @@ h4 {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 2rem;
-    gap: 1.5rem;
+    padding: 1.5rem;
+    gap: 1.2rem;
     transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
     width: 100%;
     max-width: 400px;
     /* Sensible default for mobile/tablet */
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1400px) {
+
+    /* 4 itens por linha para monitores grandes (27 polegadas+) */
     .line-card {
-        width: calc(33.333% - 2rem);
-        /* 3 items per row accounting for gap */
+        width: calc(25% - 1.5rem);
         max-width: none;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1399px) {
+
+    /* 2 itens por linha para monitores menores e laptops */
+    .line-card {
+        width: calc(50% - 2rem);
+        max-width: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* 1 item por linha para celular */
+    .line-card {
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto;
     }
 }
 
@@ -817,11 +837,26 @@ h4 {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.line-card h3 {
-    font-size: 1.4rem;
-    margin: 0;
+.line-logo-wrapper {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.8rem;
 }
 
+.line-logo {
+    max-height: 100%;
+    max-width: 95%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
+}
+
+.passion-home-card .line-logo {
+    /* PassionHome logo is light/white, might need a bit more brightness on dark cards */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)) brightness(1.2);
+}
 
 .roller-container {
     position: relative;
@@ -978,7 +1013,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/img/backgrounds/form-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/form-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -2049,7 +2084,7 @@ footer {
     line-height: 1;
 }
 
-/* --- Success Pop-up (Apple Style) --- */
+/* --- Success Pop-up (Modern Premium Glassmorphism) --- */
 .success-popup {
     position: fixed;
     top: 0;
@@ -2062,7 +2097,9 @@ footer {
     z-index: 10000;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s, opacity 0.4s ease;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
     padding: 20px;
 }
 
@@ -2072,95 +2109,212 @@ footer {
 }
 
 .popup-glass {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 30px;
-
-    /* ✅ aumenta tamanho */
-    width: min(900px, 92vw);
-    max-width: 900px;
-    padding: 3.5rem;
-
-    /* ✅ controla altura sem estourar tela */
-    max-height: 85vh;
-    overflow: auto;
-
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    width: min(550px, 95vw);
+    padding: 3rem;
     position: relative;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-    transform: translateY(20px);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    transform: scale(0.9) translateY(30px);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-align: center;
 }
 
-
 .success-popup.show .popup-glass {
-    transform: translateY(0);
+    transform: scale(1) translateY(0);
 }
 
 .close-popup {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: #f7f2e7;
-    width: 32px;
-    height: 32px;
+    top: 24px;
+    right: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
 }
 
 .close-popup:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--primary-neon);
+    transform: rotate(90deg);
 }
 
-.popup-content {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+.popup-header {
+    margin-bottom: 2.5rem;
 }
 
-.gestora-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid rgba(247, 242, 231, 0.3);
-    flex-shrink: 0;
+.success-icon-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
 }
 
-.gestora-image img {
+.main-success-logo {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(119, 3, 29, 0.4)) brightness(1.2);
+    position: relative;
+    z-index: 2;
 }
 
-.popup-text h3 {
-    font-size: 1.8rem;
-    color: #f7f2e7;
-    margin-bottom: 0.5rem;
+.success-waves {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: var(--primary-neon);
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: wavePulse 2s infinite ease-out;
 }
 
-.popup-text p {
-    color: #f7f2e7;
-    line-height: 1.5;
-    font-size: 1rem;
+@keyframes wavePulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+    }
+}
+
+.pro-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: rgba(119, 3, 29, 0.1);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    color: var(--primary-neon);
+    border: 1px solid rgba(119, 3, 29, 0.3);
+}
+
+.popup-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.popup-message {
+    font-size: 1.1rem;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.gestora-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+
+.pulse-indicator {
+    width: 10px;
+    height: 10px;
+    background: #00ff88;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px #00ff88;
+    animation: pulseActive 1.5s infinite;
+}
+
+@keyframes pulseActive {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.gestora-info p {
+    font-size: 0.95rem;
+    color: #eee;
     margin: 0;
 }
 
+.popup-alternative {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1.5rem;
+}
+
+.whatsapp-pro-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background: #fff;
+    color: #000;
+    padding: 1.2rem;
+    border-radius: 18px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-pro-btn:hover {
+    background: #25D366;
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.3);
+}
+
 @media (max-width: 480px) {
-    .popup-content {
-        flex-direction: column;
-        text-align: center;
+    .popup-glass {
+        padding: 2.5rem 1.5rem;
+        border-radius: 30px;
     }
 
-    .popup-glass {
-        padding: 2rem;
+    .popup-title {
+        font-size: 2rem;
+    }
+
+    .popup-message {
+        font-size: 1rem;
+    }
+
+    .contact-card {
+        padding: 1.2rem;
     }
 }
 
@@ -2281,5 +2435,3 @@ footer {
         font-size: 1rem;
     }
 }
-
-
