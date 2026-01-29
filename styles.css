@@ -248,7 +248,7 @@ h4 {
     margin: 0;
     padding: 18rem 2rem 5rem 2rem;
     /* Significant top padding for floating header clearance */
-    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)), url('assets/backgrounds/hero-bg.png');
+    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)), url('assets/img/backgrounds/hero-bg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1013,7 +1013,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/backgrounds/form-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/img/backgrounds/form-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1615,7 +1615,7 @@ h4 {
 /* Testimonials Section */
 .testimonials {
     padding: 8rem 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/backgrounds/testimonials-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/img/backgrounds/testimonials-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -2435,4 +2435,5 @@ footer {
         font-size: 1rem;
     }
 }
+
 
