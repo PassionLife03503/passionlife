@@ -23,7 +23,7 @@
     <header class="glass-header">
         <nav>
             <a href="#" class="logo">
-                <img src="assets/img/logos/logo-new.png" alt="PassionLife Logo">
+                <img src="assets/logo-new.png" alt="PassionLife Logo">
             </a>
 
             <button class="mobile-menu-toggle" aria-label="Abrir Menu">
@@ -145,7 +145,10 @@
                 <div class="lines-grid">
                     <!-- PassionIntima -->
                     <div class="line-card glass-card passion-intima-card">
-                        <h3>Passion<span class="highlight">Intima</span></h3>
+                        <div class="line-logo-wrapper">
+                            <img src="assets/img/logos/Logos prolifehome (21).png" alt="IntimaPassion"
+                                class="line-logo">
+                        </div>
                         <div class="roller-container">
                             <button class="scroll-arrow scroll-left" aria-label="Scroll Left"><i
                                     data-lucide="chevron-left"></i></button>
@@ -164,7 +167,9 @@
 
                     <!-- PassionBeach -->
                     <div class="line-card glass-card passion-beach-card">
-                        <h3>Passion<span class="highlight">Beach</span></h3>
+                        <div class="line-logo-wrapper">
+                            <img src="assets/img/logos/Logos prolifehome (24).png" alt="PassionBeach" class="line-logo">
+                        </div>
                         <div class="roller-container">
                             <button class="scroll-arrow scroll-left" aria-label="Scroll Left"><i
                                     data-lucide="chevron-left"></i></button>
@@ -183,7 +188,9 @@
 
                     <!-- PassionMove -->
                     <div class="line-card glass-card passion-move-card">
-                        <h3>Passion<span class="highlight">Move</span></h3>
+                        <div class="line-logo-wrapper">
+                            <img src="assets/img/logos/Logos prolifehome (23).png" alt="PassionMove" class="line-logo">
+                        </div>
                         <div class="roller-container">
                             <button class="scroll-arrow scroll-left" aria-label="Scroll Left"><i
                                     data-lucide="chevron-left"></i></button>
@@ -202,7 +209,9 @@
 
                     <!-- PassionHome -->
                     <div class="line-card glass-card passion-home-card">
-                        <h3>Passion<span class="highlight">Home</span></h3>
+                        <div class="line-logo-wrapper">
+                            <img src="assets/img/logos/Logos prolifehome (22).png" alt="PassionHome" class="line-logo">
+                        </div>
                         <div class="roller-container">
                             <button class="scroll-arrow scroll-left" aria-label="Scroll Left"><i
                                     data-lucide="chevron-left"></i></button>
@@ -509,20 +518,42 @@
         </div>
     </footer>
 
-    <!-- Success Pop-up (Apple Style) -->
+    <!-- Success Pop-up (Modern Premium Glassmorphism) -->
     <div id="success-popup" class="success-popup">
         <div class="popup-glass">
             <button class="close-popup" aria-label="Fechar">
                 <i data-lucide="x"></i>
             </button>
-            <div class="popup-content">
-                <div class="gestora-image">
-                    <img src="assets/gestora.png" alt="Gestora PassionLife">
+            <div class="popup-container">
+                <div class="popup-header">
+                    <div class="success-icon-wrapper">
+                        <div class="success-waves"></div>
+                        <img src="assets/img/logos/logo.png" alt="PassionLife Logo" class="main-success-logo">
+                    </div>
+                    <span class="pro-tag">Acesso VIP</span>
                 </div>
-                <div class="popup-text">
-                    <h3>Parabéns!</h3>
-                    <p>Seu cadastro foi feito com sucesso. Em <strong>4 minutos</strong>, uma de nossas gestoras de
-                        vendas entrará em contato com você!</p>
+
+                <div class="popup-body">
+                    <h2 class="popup-title">Parabéns!</h2>
+                    <p class="popup-message">
+                        Seu cadastro foi realizado com sucesso. O seu futuro como revendedora de elite começa agora.
+                    </p>
+
+                    <div class="contact-card">
+                        <div class="gestora-info">
+                            <div class="pulse-indicator"></div>
+                            <p>Uma de nossas <strong>Gestoras de Vendas</strong> entrará em contato com você em até
+                                <strong>4 minutos</strong>!
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="popup-alternative">Ou se preferir, clique abaixo e fale conosco agora:</p>
+
+                    <a href="https://wa.me/55599128746" target="_blank" class="whatsapp-pro-btn">
+                        <i data-lucide="whatsapp"></i>
+                        Falar com Consultora
+                    </a>
                 </div>
             </div>
         </div>
@@ -536,4 +567,3 @@
 </body>
 
 </html>
-
