@@ -251,7 +251,14 @@ h4 {
     background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.5)), url('assets/img/backgrounds/hero-bg.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+@media (min-width: 1025px) {
+    .hero-section {
+        background-attachment: fixed;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1016,7 +1023,14 @@ h4 {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/img/backgrounds/form-bg.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+@media (min-width: 1025px) {
+    .cta-section {
+        background-attachment: fixed;
+    }
 }
 
 /* CTA Glass Container - Apple Style "Bubble" */
@@ -1618,11 +1632,18 @@ h4 {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/img/backgrounds/testimonials-bg.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
     text-align: center;
     color: #fff;
     position: relative;
     overflow: hidden;
+}
+
+@media (min-width: 1025px) {
+    .testimonials {
+        background-attachment: fixed;
+    }
 }
 
 .testimonials .section-title {
@@ -2435,5 +2456,3 @@ footer {
         font-size: 1rem;
     }
 }
-
-
