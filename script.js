@@ -364,4 +364,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ✅ Testimonial Video Loader
+    const testimonialCards = document.querySelectorAll('.testimonial-card[data-video-id]');
+    testimonialCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const videoId = this.getAttribute('data-video-id');
+            const iframe = document.createElement('iframe');
+            
+            iframe.setAttribute('width', '100%');
+            iframe.setAttribute('height', '100%');
+            iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`);
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+
+            // Clear placeholder and add iframe
+            this.innerHTML = '';
+            this.appendChild(iframe);
+        });
+    });
+
 });
