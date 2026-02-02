@@ -169,7 +169,7 @@ h4 {
     margin: 0;
     padding: 8rem 2rem 5rem 2rem;
     /* Adjusted padding now that floating header is gone */
-    background: linear-gradient(rgba(12, 12, 12, 0.8), rgba(12, 12, 12, 0.6)), url('backgrounds/hero-bg.png');
+    background: linear-gradient(rgba(12, 12, 12, 0.8), rgba(12, 12, 12, 0.6)), url('assets/img/backgrounds/hero-bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1005,7 +1005,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(rgba(140, 35, 24, 0.2), rgba(12, 12, 12, 0.8)), url('backgrounds/form-bg.jpg');
+    background: linear-gradient(rgba(140, 35, 24, 0.2), rgba(12, 12, 12, 0.8)), url('assets/img/backgrounds/form-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1662,7 +1662,7 @@ h4 {
 /* Testimonials Section */
 .testimonials {
     padding: 8rem 0;
-    background: linear-gradient(rgba(12, 12, 12, 0.8), rgba(180, 165, 150, 0.1)), url('backgrounds/testimonials-bg.jpg');
+    background: linear-gradient(rgba(12, 12, 12, 0.8), rgba(180, 165, 150, 0.1)), url('assets/img/backgrounds/testimonials-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -2502,3 +2502,4 @@ footer {
         font-size: 1rem;
     }
 }
+
