@@ -316,6 +316,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
+                // Update WhatsApp Link based on selected option
+                const tipoCadastro = formData.get('tipo_cadastro');
+                const whatsappBtn = successPopup.querySelector('.whatsapp-pro-btn');
+                const phone = '553599128746';
+                let message = '';
+
+                if (tipoCadastro === 'ja_revendo') {
+                    message = 'Olá, Eu já revendo e gostaria de Começar a revender PassionLife';
+                } else if (tipoCadastro === 'comecar_revender') {
+                    message = 'Olá, Eu já gostaria de Começar a revender PassionLife';
+                } else if (tipoCadastro === 'lojista') {
+                    message = 'Olá, sou lojista e gostaria de comprar';
+                }
+
+                if (whatsappBtn && message) {
+                    whatsappBtn.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+                }
+
                 // Show Apple-style Pop-up
                 successPopup.classList.add('show');
                 signupForm.reset();
@@ -367,10 +385,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // ✅ Testimonial Video Loader
     const testimonialCards = document.querySelectorAll('.testimonial-card[data-video-id]');
     testimonialCards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
             const videoId = this.getAttribute('data-video-id');
             const iframe = document.createElement('iframe');
-            
+
             iframe.setAttribute('width', '100%');
             iframe.setAttribute('height', '100%');
             iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`);
